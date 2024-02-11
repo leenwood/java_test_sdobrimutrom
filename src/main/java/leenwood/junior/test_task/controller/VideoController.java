@@ -9,6 +9,7 @@ import leenwood.junior.test_task.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -75,7 +76,8 @@ public class VideoController {
 
     @ExceptionHandler(Throwable.class)
     @ResponseBody
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionModelResponse exceptionListener(Throwable exception) {
-        return new ExceptionModelResponse(400, exception.getMessage());
+        return new ExceptionModelResponse(exception.getMessage());
     }
 }

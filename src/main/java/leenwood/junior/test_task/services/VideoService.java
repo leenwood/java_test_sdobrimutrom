@@ -7,6 +7,7 @@ import leenwood.junior.test_task.entity.VideoEntity;
 import leenwood.junior.test_task.model.VideoStatusResponse;
 import leenwood.junior.test_task.repository.VideoEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +26,10 @@ public class VideoService {
     private final VideoEntityRepository videoPathRepository;
 
 
+    @Value("${application.save.video.route}")
+    private String saveVideoRoute;
+
+
     @Autowired
     public VideoService(VideoEntityRepository videoPathRepository) {
         this.videoPathRepository = videoPathRepository;
@@ -32,9 +37,7 @@ public class VideoService {
 
 
     public UUID UploadVideo(MultipartFile video) throws IOException {
-
-        String uploadDir = "./uploads/videos/";
-        Path uploadPath = Paths.get(uploadDir);
+        Path uploadPath = Paths.get(this.saveVideoRoute);
 
         VideoEntity videoEntity = new VideoEntity();
 

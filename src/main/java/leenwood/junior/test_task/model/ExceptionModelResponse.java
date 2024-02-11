@@ -6,10 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ExceptionModelResponse {
-
-    public int code;
-
-    public String message;
-
-
+    public String error;
 }
